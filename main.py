@@ -4,12 +4,11 @@ import math
 from pygame import mixer
 
 pygame.init()
-#
 # mixer.music.load('background.wav')
 # mixer.music.play(-1)
 
-enemy_var = 0.6
-player_var = 0.3
+enemy_var = 5
+player_var = 8.5
 
 background = pygame.image.load('background.png')
 
@@ -79,21 +78,19 @@ def fire_bullet(x,y):
 
 while running:
     screen.fill((0, 0, 0))
-    #screen.blit(background,(0,0))
+    screen.blit(background,(0,0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 playerX_change = -player_var
-                print("go left")
             if event.key == pygame.K_UP:
-                print("go up")
+                pass
             if event.key == pygame.K_DOWN:
-                print("go down")
+                pass
             if event.key == pygame.K_RIGHT:
                 playerX_change = player_var
-                print("do right")
             if event.key == pygame.K_SPACE:
                 if bullet_state is "ready":
                     bullet_sound = mixer.Sound('laser.wav')
@@ -103,7 +100,6 @@ while running:
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 playerX_change = 0
-                print("key stroke released")
 
     playerX += playerX_change
     if playerX <= 0:
@@ -132,7 +128,6 @@ while running:
             bulletY = 480
             bullet_state = "ready"
             score += 1
-            print(score)
             enemyX[i] = random.randint(0, 735)
             enemyY[i] = random.randint(50, 150)
         enemy(enemyX[i], enemyY[i],i)
